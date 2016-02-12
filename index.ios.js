@@ -7,7 +7,7 @@ import React, {
   AppRegistry,
   Component,
   Image,
-  ListView,
+  NavigatorIOS,
   StyleSheet,
   Text,
   View
@@ -18,13 +18,19 @@ var {
   FBSDKLoginButton,
 } = FBSDKLogin;
 
+class RestaurantSearch extends Component {
+  render() {
+    return (
+      <Text style={styles.text}>Heyo</Text>
+    )
+  }
+}
+
 class GoodBadRestaurant extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
+      something: false,
     };
   }
 
@@ -46,23 +52,12 @@ class GoodBadRestaurant extends Component {
 
   render() {
     return (
-      <FBSDKLoginButton
-          style={styles.loginButton}
-          onLoginFinished={(error, result) => {
-            if (error) {
-              alert('Error logging in.');
-            } else {
-              if (result.isCancelled) {
-                alert('Login cancelled.');
-              } else {
-                alert('Logged in.');
-              }
-            }
-          }}
-          onLogoutFinished={() => alert('Logged out.')}
-          readPermissions={[]}
-          publishPermissions={['publish_actions']}
-      />
+      <NavigatorIOS
+        style={styles.container}
+        initialRoute={{
+          title: '好不好餐廳',
+          component: RestaurantSearch,
+        }} />
     )
   }
 
@@ -95,36 +90,11 @@ class GoodBadRestaurant extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000000',
   },
-  rightContainer: {
-    flex: 1,
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#F5FCFF',
-  },
-  loginButton: {
-    alignSelf: 'center',
-    width: 200,
-    height: 44,
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-    color: '#FFFFFF',
-  },
-  year: {
-    textAlign: 'center',
-    color: '#FFFFFF',
-  },
-  thumbnail: {
-    width: 53,
-    height: 81,
+  text: {
+    color: 'black',
+    fontSize: 30,
+    margin: 80,
   }
 });
 
